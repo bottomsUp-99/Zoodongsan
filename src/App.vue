@@ -55,20 +55,25 @@ body{
 div {
   box-sizing: border-box;
 }
-.black-bg{
+.black-bg {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.5);
   position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
 }
-.white-bg{
+
+.white-bg {
   width: 80%;
   max-width: 500px;
   background: white;
   border-radius: 8px;
   padding: 20px;
-  position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .modal-image{
@@ -87,7 +92,7 @@ div {
   text-align: center;
   color: #2c3e50;
 }
-.menu{
+/* .menu{
   background: darkblue;
   padding: 15px;
   border-radius: 5px;
@@ -95,5 +100,24 @@ div {
 .menu a{
   color: white;
   padding: 10px;
+} */
+.menu {
+  background: darkblue;
+  padding: 15px;
+  border-radius: 5px;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.menu a {
+  color: white;
+  padding: 10px;
+  margin: 0 5px;
 }
 </style>
