@@ -1,63 +1,45 @@
 <template>
+
   <div class="black-bg" v-if="modalIsOpen == true">
     <div class="white-bg">
+      <img :src="oneroomdata[clickedNum].image" :alt="oneroomdata[clickedNum].title" class="modal-image">
+      <h4>{{oneroomdata[clickedNum].title}}</h4>
+      <p>{{oneroomdata[clickedNum].content}}</p>
+      <p>현재 가격 : {{ oneroomdata[clickedNum].price }}원</p>
       <button @click="modalIsOpen = false">닫기</button>
-      <h4>상세페이지</h4>
-      <p>상세내용</p>
     </div>
   </div>
 
   <div class="menu">
     <a v-for="a in menu" :key="a">{{ a }}</a>
   </div>
-  
-  <div>
-    <img src="./assets/room0.jpg" class="room-img">
-    <h4>{{products[0]}}</h4>
-    <p>50 만원</p>
-    <button @click="increase(0)">허위매물신고</button> <span>신고수 : {{count[0]}}</span>
+
+  <div v-if="1 == 1">
+    안녕하세요!!
   </div>
-  <div>
-    <img src="./assets/room1.jpg" class="room-img">
-    <h4>{{products[1]}}</h4>
-    <p>가격은 아무거나</p>
-    <button @click="increase(1)">허위매물신고</button> <span>신고 수 : {{ count[1] }}</span>
-  </div>
-  <div>
-    <img src="./assets/room2.jpg" class="room-img">
-    <h4>{{ products[2] }}</h4>
-    <p>가격은 아무거나</p>
-    <button @click="increase(2)">허위매물신고</button> <span>신고 수 : {{ count[2] }}</span>
+  <div v-else>
+    안녕히가세요!!
   </div>
 
-  <hr>
-  <hr>
-
-  <div v-for="(room, i) in products" :key="i">
-    <img :src="img[i]" :alt="products[i]" class="room-img">
-    <h4 @click="modalIsOpen = true">{{ room }}</h4>
-    <p>{{ price[i] }} 만원</p>
-    <button @click="increase(i)">허위매물 신고</button> <span>신고 수 : {{ count[i] }}</span>
+  <div v-for="(room, i) in oneroomdata" :key="i">
+    <img :src="room.image" :alt="room.title" class="room-img">
+    <h4 @click="modalIsOpen = true; clickedNum = i">{{ room.title }}</h4>
+    <p>{{ room.price }} 원</p>
   </div>
 </template>
 
 <script>
 
+import data from './assets/oneroom';
+
 export default {
   name: 'App',
   data() {
     return {
+      clickedNum : 0,
+      oneroomdata : data,
       menu : ['Home', 'Shop', 'About'],
-      products : ['역삼동 원룸', '천호동원룸', '마포구원룸'],
-      price : [10, 20, 30],
-      count : [0 ,0, 0],
-      img : [require('./assets/room0.jpg'), require('./assets/room1.jpg'), require('./assets/room2.jpg')],
       modalIsOpen : false,
-    }
-  },
-  methods: {
-    increase(a){
-      this.count[a] += 1;
     }
   },
   components: {
@@ -81,10 +63,16 @@ div {
   padding: 20px;
 }
 .white-bg{
-  width: 100%;
+  width: 80%;
+  max-width: 500px;
   background: white;
   border-radius: 8px;
   padding: 20px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.modal-image{
+  width: 70%;
 }
 /* 여기까지 모달창임 */
 
