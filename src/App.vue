@@ -1,18 +1,13 @@
 <template>
 
-  <div class="black-bg" v-if="modalIsOpen == true">
-    <div class="white-bg">
-      <img :src="oneroomdata[clickedNum].image" :alt="oneroomdata[clickedNum].title" class="modal-image">
-      <h4>{{oneroomdata[clickedNum].title}}</h4>
-      <p>{{oneroomdata[clickedNum].content}}</p>
-      <p>현재 가격 : {{ oneroomdata[clickedNum].price }}원</p>
-      <button @click="modalIsOpen = false">닫기</button>
-    </div>
-  </div>
+  <Modal @modalClose="modalIsOpen = false" :clickedNum="clickedNum" :oneroomdata="oneroomdata" :modalIsOpen="modalIsOpen" />
+
 
   <div class="menu">
     <a v-for="a in menu" :key="a">{{ a }}</a>
   </div>
+
+  <Discount/>
 
   <div v-if="1 == 1">
     안녕하세요!!
@@ -21,16 +16,17 @@
     안녕히가세요!!
   </div>
 
-  <div v-for="(room, i) in oneroomdata" :key="i">
-    <img :src="room.image" :alt="room.title" class="room-img">
-    <h4 @click="modalIsOpen = true; clickedNum = i">{{ room.title }}</h4>
-    <p>{{ room.price }} 원</p>
-  </div>
+  <Card @openModal="modalIsOpen = true; clickedNum = $event" v-for="(room, i) in oneroomdata" :key="room" :room="oneroomdata[i]"/>
+
+
 </template>
 
 <script>
 
 import data from './assets/oneroom';
+import Discount from './Discount.vue';
+import Modal from './Modal.vue'
+import Card from './Card.vue'
 
 export default {
   name: 'App',
@@ -43,6 +39,9 @@ export default {
     }
   },
   components: {
+    Discount,
+    Modal,
+    Card,
   }
 }
 </script>
@@ -54,6 +53,13 @@ body{
 }
 div {
   box-sizing: border-box;
+}
+.discount{
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  margin-top: 60px;
+  border-radius: 5px;
 }
 .black-bg {
   width: 100%;
