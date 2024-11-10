@@ -23,6 +23,17 @@ export default {
           month : 1,
         }
     },
+    watch : {
+        month(a){
+            if(a >= 13){
+              alert('13개월 이상은 계약하실 수 없습니다!!');
+            }
+            if(isNaN(a) == true){
+              alert('문자는 입력하실 수 없습니다!!');
+              this.month = 1;
+            }
+        },
+    },
     props : {
         clickedNum : Number,
         oneroomdata : Array,
